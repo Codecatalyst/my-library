@@ -196,10 +196,12 @@ document.body.style.backgroundColor = darkMode ? "#1a1a2e" : "#ffffff"; //sets t
     
     <div className="header-bar">
       <h1>My Library</h1>
-      <button className="toggle-btn" onClick={()=>setDarkMode(!darkMode)}>
-        Dark Mode 
-      </button>
+      
+      <div className={`toggle-switch ${darkMode ? "active" : ""}`} onClick={() => setDarkMode(!darkMode)}>
+        <div className="toggle-circle"></div>
+      </div>
      </div> 
+     
       <p className="subtitle">{filteredBooks.length} books</p>
 
       <input
