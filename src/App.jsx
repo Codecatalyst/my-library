@@ -147,6 +147,7 @@ function App() {
   const filteredBooks = books.filter(book =>          // filtering logic
   book.title.toLowerCase().includes(searchText.toLowerCase())
 )
+
 const [sortingBooks, setSortingBooks] = useState(false)  //Sorting logic
 const sortingON = sortingBooks ? [...filteredBooks].sort((a, b) => a.title.localeCompare(b.title)) : filteredBooks
 
@@ -156,6 +157,7 @@ const [newStatus, setnewStatus] = useState('unread')
 
 const [notification, setNotification] = useState(false)  //Notification when a book is added
 
+const [darkMode, setDarkMode] = useState(false)        // Dark Mode feature
 
 
 function toggleStatus(id){                             //flip the button status
@@ -184,11 +186,20 @@ function deleteBooks(id){                             // Delete Books feature
   setBooks(afterDeletionBooks)
 }
 
-  return (
-    <div>
-      {notification && <div className="notification">Book added to your library!</div>} 
+document.body.style.backgroundColor = darkMode ? "#1a1a2e" : "#ffffff"; //sets the body background colour whenever darkMode changes
 
+  return (
+
+    <div className={`container ${darkMode ? "dark" : ""}`}>
+
+      {notification && <div className="notification">Book added to your library!</div>} 
+    
+    <div className="header-bar">
       <h1>My Library</h1>
+      <button className="toggle-btn" onClick={()=>setDarkMode(!darkMode)}>
+        Dark Mode 
+      </button>
+     </div> 
       <p className="subtitle">{filteredBooks.length} books</p>
 
       <input
